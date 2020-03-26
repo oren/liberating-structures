@@ -1,1 +1,2 @@
-# liberating-structures
+# Liberating Structures
+
