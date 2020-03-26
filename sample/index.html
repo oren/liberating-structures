@@ -1,112 +1,855 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Big</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link href="big.css" rel="stylesheet" type="text/css" />
-    <link href="themes/white.css" rel="stylesheet" type="text/css" />
-    <script>
-      BIG_ASPECT_RATIO = 1.6;
-    </script>
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"
-    />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-    <script src="big.js"></script>
-    <script>
-      hljs.initHighlightingOnLoad();
-    </script>
-    <style>
-      .hljs {
-        overflow-x: initial;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      Small
-    </div>
-    <div>
-      v4
-    </div>
-    <div>
-      <ul>
-        <li>Aspect ratios</li>
-        <li>Layouts</li>
-      </ul>
-    </div>
-    <div
-      class="layout"
-      style="grid-template-columns: 1fr;grid-template-rows:75% 25%;"
-    >
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>
+    beyond the for loop
+    
+    @tmcw / Tom MacWright / Mapbox
+    
+        this is a topic that’s close to my heart because it’s 
+fundamental, difficult, and subtle: something as simple as a loop can 
+expressed in vastly different ways. knowing which route to take for 
+every situation will help you write straightforward code that reflects 
+your ideas.
+    
+</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link href="index_files/big.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" async="" id="gauges-tracker" data-site-id="4e36eb1ef5a1f53d6f000001" src="index_files/track.js"></script><script src="index_files/big.js"></script></head><body class="" style="height: auto;">
 
-      <div>A longer description!</div>
-    </div>
-    <div
-      class="layout"
-      style="grid-template-columns: 1fr;grid-template-rows:25% 75%;"
-    >
-      <div>A longer description!</div>
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
-    </div>
-    <div class="layout" style="grid-template-columns: 50% 50%;">
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
-      <div>A longer description!</div>
-    </div>
-    <div>
-      <pre><code class="javascript">Date.now() + 100</code></pre>
-    </div>
-    <div>
-      <video
-        src="https://d1adp7gr8mqax6.cloudfront.net/tutorial-2/1.mp4"
-        controls
-      />
-    </div>
-    <div
-      class="layout"
-      style="grid-template-columns: 25% 75%;grid-template-rows:repeat(3, 30%);"
-    >
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
-      <div>Yes</div>
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
-      <div>No</div>
-      <img
-        src="https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362"
-      />
-      <div>
-        Just right, a lot of text goes here. Lots of text. So much. What happens
-        when it overflows?
-      </div>
-    </div>
-    <div
-      style="background-image: url(https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362)"
-    >
-      <div>
-        I have a background image, on a slide. So it is in the aspect ratio.
-      </div>
-    </div>
-    <div
-      data-body-style="background-image:url(https://cdn.glitch.com/21fc53a2-3696-4bfc-bad6-f673079bce6a%2Fairplane.gif?1557695161362)"
-    >
-      <div>So do I, on the body, so it is not.</div>
-    </div>
-  </body>
-</html>
+<div style="display: inline; font-size: 118px; margin-top: 48.5px;">
+    beyond the <code>for</code> loop
+    <br>
+    <small class="small nobreak">@tmcw / Tom MacWright / Mapbox</small>
+    <notes>
+        this is a topic that’s close to my heart because it’s 
+fundamental, difficult, and subtle: something as simple as a loop can 
+expressed in vastly different ways. knowing which route to take for 
+every situation will help you write straightforward code that reflects 
+your ideas.
+    </notes>
+</div>
+
+<div style="display: none;">
+    loops are one of the bits of <em>fundamental magic</em> in programming
+</div>
+
+<div style="display: none;">
+    <pre>if { } else { }</pre> computers can <em>make decisions</em>
+</div>
+
+<div style="display: none;">
+    <pre>for (;;) { }</pre> computers can <em>do work</em>
+</div>
+
+<div style="display: none;">
+    <span class="small">sparknotes</span>
+    <em class="nobreak">arrays</em>
+</div>
+
+<div style="display: none;">
+    arrays <em>are collections of data</em>
+    <pre>var numbers = [1, 2, 3];</pre>
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">arrays <em>have a length property</em></span>
+    <pre>numbers.length; // 3</pre>
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">arrays <em>have methods</em></span>
+    <pre>numbers.push(4);
+// puts 4 into numbers</pre>
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">arrays <em>contain data</em></span>
+    <pre>var four = numbers[3];</pre>
+</div>
+
+<div style="display: none;">
+    problem one: make some animals rock
+    <pre>var animals = <em>['cats', 'dogs']</em>;</pre>
+</div>
+
+<div style="display: none;">
+    our desire
+    <pre><em>['cats rock', 'dogs rock']</em>;</pre>
+</div>
+
+<div style="display: none;">
+    using for
+<pre>var animals = ['cats', 'dogs'];
+
+for (var i = 0; i &lt; animals.length; i++) {
+  animals[i] = animals[i] + ' rock';
+}</pre>
+</div>
+
+<div style="display: none;">
+    <code>for</code> is a way of saying <em>do this repeatedly</em>
+    <notes>
+        for is a classic example of the concept of 'imperative programming':
+        a style that emphasizes telling computers what to do. there are other
+        styles, like declarative programming, which is telling computers
+        what you want - a big example of that is SQL.
+    </notes>
+</div>
+
+<div style="display: none;">
+    equivalent to <code>while() { }</code> and <code>do { } while()</code>
+    and even <code>goto</code>
+</div>
+
+<div style="display: none;">
+    <code>for</code> loops have three basic elements
+</div>
+
+<div style="display: none;">
+where we usually make the loop counter
+<pre>for (<em>var i = 0</em>; i &lt; animals.length; i++) {
+</pre>
+</div>
+
+<div style="display: none;">
+where we usually check if we're done
+<pre>for (var i = 0; <em>i &lt; animals.length</em>; i++) {
+</pre>
+</div>
+
+<div style="display: none;">
+where we usually increment the loop counter
+<pre>for (var i = 0; i &lt; animals.length; <em>i++</em>) {
+</pre>
+</div>
+
+<div style="display: none;">
+    <pre>the loop is <em>counting from 0 to 1</em></pre>
+</div>
+
+<div style="display: none;">
+    is that what i'm doing?
+</div>
+
+<div style="display: none;">
+    <table>
+        <tbody><tr><td>in</td><td class="two">out</td></tr>
+        <tr>
+<td><pre>cats
+dogs</pre></td>
+<td><pre class="two">cats rock
+dogs rock</pre></td>
+        </tr>
+    </tbody></table>
+</div>
+
+<div style="display: none;">
+    i'm not counting from 0 to 1, i'm <em>transforming data</em>
+</div>
+
+<div style="display: none;">
+<pre>function theyRock(creatures) {
+  return creatures + ' rock';
+}
+theyRock('cats'); // <em>cats rock</em>
+</pre>
+</div>
+
+<div style="display: none;">
+<pre>function theyRock(creatures) {
+  return creatures + ' rock';
+}
+// <em>feed ['cats', 'dogs'] into theyRock</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    <em>daring thesis</em>: we should do that
+</div>
+
+<div style="display: none;">
+    let's meet the family
+</div>
+
+<div style="display: none;">
+    <pre>map, reduce, filter</pre>
+    there are others but these are the hits
+    <notes>
+    some of the others are .some(), which tells you if any element
+    of an array passes a test, .every(), which says if ever element does
+    </notes>
+</div>
+
+<div style="display: none;">
+    they live <em>on arrays</em>
+    <pre>[].filter; // there it is</pre>
+</div>
+
+<div style="display: none;">
+    for IE8 and lower use <em>es5-shim</em>
+    <small class="small nobreak">and weep legacy tears</small>
+    <notes>
+    some people use underscore or lodash for this. that's fine too,
+    but it's best to use tools that do exactly what you want: the mission
+    of underscore is to bring other functional programming goodies
+    to javascript, not to serve as a compatibility layer.
+    </notes>
+</div>
+
+<div style="display: none;">
+    so what do they do?
+</div>
+
+<div style="display: none;">
+    <pre>map</pre>
+    creates a new array by calling a function on every element of an old array
+</div>
+
+<div style="display: none;">
+    that thing from earlier but with <code>map</code>
+</div>
+
+<div style="display: none;">
+<pre>var animals = ['cats', 'dogs'];
+function theyRock(creatures) {
+  return creatures + ' rock';
+}
+var rockinAnimals = animals<em>.map(theyRock)</em>;
+</pre>
+</div>
+
+<div style="display: none;">
+    this <em>says what it does</em>: we are turning an
+    array of animals into an array or rockin animals with
+    a named function
+</div>
+
+<div style="display: none;"><img src="index_files/array_map.png"></div>
+
+<div style="display: none;">
+    it also does not <em>change the original array</em>,
+    but creates a new one
+</div>
+
+<div style="display: none;">
+    aka 'mutation', <em>changing arrays in place breeds confusion</em>
+</div>
+
+<div class="bigger" style="display: none;">
+<pre>var animals = ['cats', 'dogs'];
+function makeEmRock(animals) {
+  for (var i = 0; i &lt; animals.length; i++)
+    animals[i] = animals[i] + ' rock';
+  return animals;
+}
+var rockinAnimals = makeEmRock(animals);
+// rockinAnimals = [cats rock, dogs rock]
+<em>// animals = [cats rock, dogs rock] NOOOOOOO</em>
+</pre>
+</div>
+
+<div class="bigger" style="display: none;">
+<pre>var animals = ['cats', 'dogs'];
+function makeEmRock(animals) {
+  return animals.map(function(animal) {
+    return animal + ' rock';
+  });
+}
+var rockinAnimals = makeEmRock(animals);
+// rockinAnimals = [cats rock, dogs rock]
+<em>// animals = [cats, dogs]</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    <pre>filter</pre>
+    create a new array with only the elements that <em>pass a test</em>
+</div>
+
+<div style="display: none;">
+<pre>var animals = ['cats', 'dogs'];
+var catsOnly = [];
+for (var i = 0; i &lt; animals.length; i++)
+  if (animals[i] === 'cats')
+    catsOnly.push(animals[i]);
+
+<em>// catsOnly = ['cats']</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    but we'd want to abstract the comparison because of those
+    cats that look like dogs because of their crazy cat show owners
+    doing weird haircuts or grooming or whatever
+</div>
+
+<div style="display: none;">
+    not judging, keep rocking cat show people
+</div>
+
+<div style="display: none;">
+    this is a function that returns true or false.
+    <em>comparisons are values, liberate them from
+        <code>if</code> statements!</em>
+<pre>function thatsACat(animal) {
+  return animal === 'cats';
+}</pre>
+</div>
+
+<div style="display: none;">
+<pre>var animals = ['cats', 'dogs'];
+var catsOnly = [];
+function thatsACat(animal) {
+  return animal === 'cats';
+}
+for (var i = 0; i &lt; animals.length; i++)
+  if (thatsACat(animals[i]))
+    catsOnly.push(animals[i]);
+
+<em>// catsOnly = ['cats']</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    filter to the rescue
+<pre>var animals = ['cats', 'dogs'];
+function thatsACat(animal) {
+  return animal === 'cats';
+}
+var catsOnly = animals.filter(thatsACat);
+<em>// catsOnly = ['cats']</em>
+</pre>
+</div>
+
+<div style="display: none;"><img src="index_files/array_filter.png"></div>
+
+<div style="display: none;">
+    like map, filter creates a new array and doesn't mess with your old one
+    <notes>
+    this concept, called 'immutability', is really deep. see immutable-js
+    for an example of it taken to the extreme. the benefits of immutability,
+    besides simpler code, extend into performance and the ability to
+    undo changes to data.
+    </notes>
+</div>
 
 
+<div class="blink" style="display: none;">
+    [questions]
+</div>
+
+<div style="display: none;">
+    <pre>map</pre>
+    <span class="nobreak"> array ⇢  array of <em>transformed values</em></span>
+    <pre>filter</pre>
+    <span class="nobreak"> array ⇢  array of <em>filtered values</em></span>
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">one last kind of loop: <em>aggregation</em></span>
+    <pre> array ⇢ <em>sum</em></pre>
+</div>
+
+<div style="display: none;">
+    <pre>reduce</pre>
+    given an array and a starting value, get a result by calling a function
+    with each element of the array and the value.
+</div>
+
+<div style="display: none;">
+    um, what?
+</div>
+
+<div style="display: none;">
+    reduce is <em>more general than the others.</em>
+    let's look at it two ways.
+</div>
+
+<div style="display: none;">
+    compute the sum of an array of numbers
+<pre>var numbers = [4, 8, 15, 16, 23];
+var sum = 0;
+for (var i = 0; i &lt; numbers.length; i++) {
+  sum += numbers[i];
+}
+<em>// sum = 66</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    the gist: <i>start off with a sum of 0, add each number to it</i>
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">1. starting value = 0</span>
+    <span class="nobreak">2. add each number to current sum</span>
+    <span class="nobreak">3. voila!</span>
+</div>
+
+<div style="display: none;">
+    here's the same thing with reduce!
+<pre>var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(currentSum, value) {
+  return currentSum + value;
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    first notice the <em>starting value of 0</em>,
+    given as the second argument
+<pre class="deemphasize">var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(currentSum, value) {
+  return currentSum + value;
+}, <em>0</em>);
+</pre>
+</div>
+
+<div style="display: none;">
+    this enters the function as <em>currentSum</em>
+<pre class="deemphasize">var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(<em>currentSum</em>, value) {
+  return currentSum + value;
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    each loop returns a new value that is the new <em>currentSum</em>
+<pre class="deemphasize">var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(currentSum, value) {
+  return <em>currentSum + value;</em>
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    so, for the first iteration it looks like
+<pre>var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(<em>currentSum=0, value=4</em>) {
+  return 0 + 4;
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    and then the second
+<pre>var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(<em>currentSum=4, value=8</em>) {
+  return 4 + 8;
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    and third
+<pre>var numbers = [4, 8, 15, 16, 23];
+var sum = numbers.reduce(function(<em>currentSum=12, value=15</em>) {
+  return 12 + 15;
+}, 0);
+</pre>
+</div>
+
+<div style="display: none;">
+    here's another way of putting it
+</div>
+
+<div style="display: none;"><img src="index_files/juice.jpg"></div>
+
+<div style="display: none;">reduce is worth learning.</div>
+
+<div style="display: none;">
+    you may know reduce as <code>fold</code> or <code>foldl</code>
+    from other languages.
+</div>
+
+<div style="display: none;">
+    it can do <em>all the other ones</em>
+</div>
+
+<div style="display: none;">
+    reduce's <em>initial value</em> doesn't have to be a number.
+    what if it's an array?
+</div>
+
+<div style="display: none;">
+    remember this?
+<pre>var animals = ['cats', 'dogs'];
+
+function theyRock(list, creatures) {
+  list.push(creatures + ' rock');
+  return list;
+}
+
+var rockinAnimals = animals<em>.reduce(theyRock, []);</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    and this?
+<pre>var animals = ['cats', 'dogs'];
+function thatsACat(list, animal) {
+  if (animal === 'cats') {
+    list.push(animal);
+  }
+  return list;
+}
+var catsOnly = animals<em>.reduce(thatsACat, []);</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    we can even write a general 'filter' function
+    using reduce.
+<pre>function filter(array, fn) {
+  return array.reduce(function(memo, value) {
+    return fn(value) ?
+      memo.concat([value]) : memo;
+  }, []);
+}
+</pre>
+</div>
+
+<div style="display: none;">
+    so, use reduce always?
+    <notes>
+    for what it's worth, array.splice() is basically the reduce of
+    mutable array functions: you can use it instead of shift, unshift,
+    pop, push, and slice. but nobody ever remembers the order
+    of arguments and the name sounds weird so they don't.
+    </notes>
+</div>
+
+<div style="display: none;">
+    no
+</div>
+
+<div style="display: none;">
+    use the right tool for the job
+    <a class="nobreak" href="https://j.mp/js-loops">j.mp/js-loops</a>
+</div>
+
+<div style="display: none;">
+    use map for transforming values
+</div>
+<div style="display: none;"><img src="index_files/array_map.png"></div>
+
+<div style="display: none;">
+    use filter for filtering values
+</div>
+<div style="display: none;"><img src="index_files/array_filter.png"></div>
+
+<div style="display: none;">
+    use reduce for aggregating values
+</div>
+<div style="display: none;"><img src="index_files/juice.jpg"></div>
+
+<div style="display: none;">
+    use <code>for</code> loops for performance hotspots
+    <em>make sure they're hotspots first</em>.
+</div>
+
+<div class="blink" style="display: none;">
+    [questions]
+</div>
+
+<div style="display: none;">
+    chaining
+</div>
+
+<div style="display: none;">
+    <span class="nobreak">made famous by <em>$</em></span>
+</div>
+
+<div style="display: none;">
+<pre>$('div')
+  .css('background', 'Gainsboro')
+  .slideIn()
+  .doBarrelRoll();</pre>
+</div>
+
+<div style="display: none;">
+    this is a real color
+<pre class="deemphasize">$('div')
+  .css('background', <em>'Gainsboro'</em>)
+  .slideIn()
+  .doBarrelRoll();</pre>
+</div>
+
+<div data-bodyclass="gainsboro" style="display: none;">
+    it's grayish
+</div>
+
+<div style="display: none;">
+    anyway: chaining is useful for doing multiple
+    steps quickly without intermediate variables
+<pre>thing
+  .function()
+  .function()
+  .function();</pre>
+</div>
+
+<div style="display: none;">
+    <code>map</code> and <code>filter</code> return arrays
+    and <em>are functions on arrays</em>
+<pre>var rockin = ['cats', 'dogs']
+    .map(theyRock);
+
+var catsOnly = ['cats', 'dogs']
+    .filter(thatsACat);
+</pre>
+</div>
+
+<div style="display: none;">
+    <em>THEREFORE</em>
+<pre>var rockinCatsOnly = ['cats', 'dogs']
+    .filter(thatsACat)
+    .map(theyRock);
+// <em>['cats rock']</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    the things that used to be in loops are now reusable
+    and combinable
+<pre>var rockinCatsOnly = ['cats', 'dogs']
+    .filter(<em>thatsACat</em>)
+    .map(<em>theyRock</em>);
+// <em>['cats rock']</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    <pre class="deemphasize"><em>✌ thanks</em> | @tmcw | Tom</pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: none;">
+    let's talk <em>blocks vs functions</em> real quick
+</div>
+
+<div style="display: none;">
+    for loops are one kind of block:
+<pre>for <em>(var i = 0; i &lt; 3; i++) {
+} </em>
+</pre>
+</div>
+
+<div style="display: none;">
+    blocks are in for loops,
+    switch statements, if / else
+</div>
+
+<div style="display: none;">
+    when you see <code>{ }</code> but no <code>function</code>,
+    you're looking at a block.
+</div>
+
+<div style="display: none;">
+    blocks are chunks of work: the code within them might run lots of times
+    <pre>for <em>(var i = 0; i &lt; 3; i++) {
+  alert('annoy!')
+}</em></pre>
+</div>
+
+<div style="display: none;">
+    or it might never run
+    <pre>if <em>(false) {
+  alert('sad.')
+}</em></pre>
+</div>
+
+<div style="display: none;">
+    blocks and functions both have <code>{ }</code>
+    but have a big difference: <em>scope</em>
+</div>
+
+<div style="display: none;">
+    <em>scope</em> is <em>containingness</em>
+</div>
+
+<div style="display: none;">
+    variables are <em>contained in scopes</em>
+</div>
+
+<div style="display: none;">
+    this <em>saves us from conflict</em>.
+    without scope, every time you named a variable
+    you'd have to be sure it was <em>the only thing
+    named that everywhere</em>. that's crazy.
+</div>
+
+<div class="bigger" style="display: none;">
+    for instance,
+    <pre>function divide(a, b) {
+  var divided = a / b;
+  <em>divided only exists here!</em>
+  return divide;
+}
+var myResult = divide(1, 3);
+<em>divided doesnt exist here!</em>
+</pre></div>
+
+<div style="display: none;">
+    so variables are <em>contained by scopes</em>
+    and <em>only functions</em> give you scopes
+</div>
+
+<div style="display: none;">
+    but, Tom, we were just talking about
+    loops, why does this matter?
+</div>
+
+<div style="display: none;">
+    <code>for</code> loops are blocks,
+    <code>map, filter, reduce</code> are functions.
+</div>
+
+<div style="display: none;">
+    example of disaster
+</div>
+
+<div class="bigger" style="display: none;">
+<pre>var numbers = [1,2,3];
+var sum = 0;
+<em>// i will leave my
+// important business here, yes</em>
+var importantBusiness = 42;
+
+<em>// copy &amp; pasted this - me</em>
+for (var i = 0; i &lt; numbers.length; i++) {
+    sum = i += numbers[i];
+    <em>var importantBusiness = sum + 1</em>;
+}
+<em>importantBusiness is now equal to 6!?</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    o no!
+</div>
+
+<div style="display: none;">
+    variables leak out &amp; in <code>for</code> loops.
+    another variable leaked out of that one:
+</div>
+
+<div class="bigger" style="display: none;">
+<pre>var numbers = [1,2,3];
+var sum = 0;
+// i will leave my
+// important business here, yes
+var importantBusiness = 42;
+
+// copy &amp; pasted this - me
+for (var i = 0; i &lt; numbers.length; i++) {
+    sum = i += numbers[i];
+    var importantBusiness = sum + 1;
+}
+<em>// i = 16</em>
+</pre>
+</div>
+
+<div class="bigger" style="display: none;">
+    now see the functional version
+<pre>// i will leave my
+// important business here, yes
+var importantBusiness = 42;
+
+var numbers = [1,2,3];
+var sum = numbers.reduce(function(current, value) {
+  var importantBusiness = current + 1;
+  return current + value;
+}, 0);
+
+<em>importantBusiness = 42; still! phew.</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    leak-free! the variables <em>current</em> and <em>value</em>
+    are contained within the function, and when we talk about
+    <em>importantBusiness</em>, it refers to the variable in function
+    scope, so the other one isn't affected.
+</div>
+
+<div style="display: none;">
+    having scopes also fixes this problem:
+<pre>for (var i = 0; i &lt; 3; i++) {
+    setTimeout(function() {
+       console.log(i);
+    }, 10);
+}
+<em>logs 3, 3, 3</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    voila!
+<pre>[0, 1, 2].map(function(i) {
+    setTimeout(function() {
+        console.log(i);
+    }, 10);
+});
+<em>logs 1, 2, 3</em>
+</pre>
+</div>
+
+<div style="display: none;">
+    the value is in the function's scope:
+    it doesn't change after being passed to the function.
+<pre>[0, 1, 2].map(function(<em>i</em>) {
+    setTimeout(function() {
+        console.log(<em>i</em>);
+    }, 10);
+});
+<em>logs 1, 2, 3</em>
+</pre>
+</div>
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '4e36eb1ef5a1f53d6f000001');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+
+
+</body></html>
